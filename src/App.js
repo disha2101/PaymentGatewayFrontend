@@ -12,7 +12,7 @@ function loadScript(src){
   document.body.appendChild(script);
 })
 }
-const __DEV__ = document.domain === 'localhost'
+const __DEV__ = document.domain === 'production'
 function App() {
   const [name,setName] = useState('Disha Bahal');
    async function displayRazorpay(){
@@ -23,18 +23,20 @@ function App() {
       return
     }
 
-    const data = await fetch('http://localhost:1337/razorpay',{method:'POST'}).then((t)=>t.json())
+    const data = await fetch('https://react-payment-gateway.herokuapp.com/razorpay',{method:'POST'}).then((t)=>t.json())
     console.log(data)
+
+    // yaha par backend ka link ayega ...deploy k baad localhost se connectiontoot jaate h
 
 
     const options = {
-    key: __DEV__?'rzp_test_n5dHo3lkFh2iLN' : 'Production', // Enter the Key ID generated from the Dashboard
+    key: __DEV__?'rzp_test_n5dHo3lkFh2iLN' : 'rzp_test_n5dHo3lkFh2iLN', //  dekh aana toh chahiye tha production id but abhi testing k liye same rakh dete hai baad me chenage kr denge thk?Enter the Key ID generated from the Dashboard
       amount: data.amount.toString(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       currency: data.currency,
       order_id:data.id,
       name: "Donation",
       description: "Thankyou!!",
-      image: "http://localhost:1337/logo.svg",
+      image: "https://react-payment-gateway.herokuapp.com/logo.svg",
      // order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
       handler: function (response){
           alert(response.razorpay_payment_id);
@@ -53,7 +55,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Hello Guys!!Wanna Donate 5 Rupees?Click below..
         </p>
         <a
           className="App-link"
