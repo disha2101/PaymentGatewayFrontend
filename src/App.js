@@ -12,7 +12,7 @@ function loadScript(src){
   document.body.appendChild(script);
 })
 }
-const __DEV__ = document.domain === 'production'
+const __DEV__ = document.domain === 'react-payment-gateway.web.app'
 function App() {
   const [name,setName] = useState('Disha Bahal');
    async function displayRazorpay(){
